@@ -1,54 +1,40 @@
-version: '3'
-
+version: "3.9"
+    
 services:
-  # Database
   db:
     image: mysql:5.7
     volumes:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: passw0rd
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
-      MYSQL_DB_HOST: 3306
-
-  # phpmyadmin
-  phpmyadmin:
-    depends_on:
-      - db
-    image: phpmyadmin/phpmyadmin
-    restart: always
-    ports:
-      - '3602:80'
-    environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: password 
-  # Wordpress
+      MYSQL_ROOT_PASSWORD: dbpassword
+      MYSQL_DATABASE: wordpress_local
+      MYSQL_USER: wordpress_db_user
+      MYSQL_PASSWORD: wordpress_db_password
+    
   wordpress:
     depends_on:
       - db
     image: wordpress:latest
+    volumes:
+      - wordpress_data:/var/www/html
     ports:
-      - '3601:80'
+      - "3601:80"
     restart: always
-    volumes: ['wp/:/var/www/html']
     environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress_db_user
+      WORDPRESS_DB_PASSWORD: wordpress_db_password
+      WORDPRESS_DB_NAME: wordpress_local
       VIRTUAL_HOST: www.euca-estudio.dan1d.dev, euca-estudio.dan1d.dev
       LETSENCRYPT_HOST: www.euca-estudio.dan1d.dev, euca-estudio.dan1d.dev
       VIRTUAL_PORT: 3601
       LETSENCRYPT_EMAIL: danielfromarg@gmail.com 
+volumes:
+  db_data: {}
+  wordpress_data: {}
 
 networks:
   default:
     external:
       name: nginx-proxy
-
-volumes:
-  db_data:
-  wp:
-  
