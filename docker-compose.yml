@@ -1,38 +1,21 @@
-version: "3.9"
-    
 services:
-  db:
-    image: mysql:5.7
-    volumes:
-      - db_data:/var/lib/mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: dbpassword
-      MYSQL_DATABASE: wordpress_local
-      MYSQL_USER: wordpress_db_user
-      MYSQL_PASSWORD: wordpress_db_password
-    
   wordpress:
-    depends_on:
-      - db
     image: wordpress:latest
-    volumes:
-      - wordpress_data:/var/www/html
+    container_name: euca-estudio
+    domainname: euca-estudio.dan1d.dev
+    hostname: euca-estudio
+    build: .
     ports:
-      - "3601:80"
+      - '8001:80'
     restart: always
+    volumes: ['./wordpress:/var/www/html/clients/euca-estudio']
+    env_file:
+      - ./.env
     environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: wordpress_db_user
-      WORDPRESS_DB_PASSWORD: wordpress_db_password
-      WORDPRESS_DB_NAME: wordpress_local
-      VIRTUAL_HOST: www.euca-estudio.dan1d.dev, euca-estudio.dan1d.dev
+      VIRTUAL_HOST: euca-estudio.dan1d.dev, www.euca-estudio.dan1d.dev
+      VIRTUAL_PORT: 8001
       LETSENCRYPT_HOST: www.euca-estudio.dan1d.dev, euca-estudio.dan1d.dev
-      VIRTUAL_PORT: 3601
       LETSENCRYPT_EMAIL: danielfromarg@gmail.com 
-volumes:
-  db_data: {}
-  wordpress_data: {}
 
 networks:
   default:
