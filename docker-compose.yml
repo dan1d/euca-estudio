@@ -12,7 +12,7 @@ services:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
-      MYSQL_DB_HOST: 3310
+      MYSQL_DB_HOST: 3306
 
   # phpmyadmin
   phpmyadmin:
@@ -31,16 +31,16 @@ services:
       - db
     image: wordpress:latest
     ports:
-      - '3610:80'
+      - '3601:80'
     restart: always
     volumes: ['wp/:/var/www/html']
     environment:
-      WORDPRESS_DB_HOST: db:3310
+      WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       VIRTUAL_HOST: www.euca-estudio.dan1d.dev, euca-estudio.dan1d.dev
       LETSENCRYPT_HOST: www.euca-estudio.dan1d.dev, euca-estudio.dan1d.dev
-      VIRTUAL_PORT: 3010
+      VIRTUAL_PORT: 3601
       LETSENCRYPT_EMAIL: danielfromarg@gmail.com 
 
 networks:
@@ -51,3 +51,4 @@ networks:
 volumes:
   db_data:
   wp:
+  
