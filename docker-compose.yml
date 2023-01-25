@@ -33,7 +33,7 @@ services:
     ports:
       - '3610:80'
     restart: always
-    volumes: ['./:/var/www/html']
+    volumes: ['wp/:/var/www/html']
     environment:
       WORDPRESS_DB_HOST: db:3310
       WORDPRESS_DB_USER: wordpress
@@ -50,3 +50,4 @@ networks:
 
 volumes:
   db_data:
+  wp:
