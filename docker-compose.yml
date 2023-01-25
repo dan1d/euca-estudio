@@ -2,8 +2,8 @@ services:
   wordpress:
     image: wordpress:latest
     container_name: euca-estudio
-    domainname: euca-estudio.dan1d.dev
-    hostname: euca-estudio
+    domainname: localhost
+    hostname: localhost
     build: .
     ports:
       - '8001:80'
