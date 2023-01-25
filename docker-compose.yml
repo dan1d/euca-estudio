@@ -2,8 +2,8 @@ services:
   wordpress:
     image: wordpress:latest
     container_name: euca-estudio
-    domainname: localhost
-    hostname: localhost
+    domainname: euca-estudio.com
+    hostname: euca-estudio.com
     build: .
     ports:
       - '8001:80'
@@ -12,9 +12,9 @@ services:
     env_file:
       - ./.env
     environment:
-      VIRTUAL_HOST: euca-estudio.dan1d.dev, www.euca-estudio.dan1d.dev
+      VIRTUAL_HOST: euca-estudio.com, www.euca-estudio.com
       VIRTUAL_PORT: 8001
-      LETSENCRYPT_HOST: www.euca-estudio.dan1d.dev, euca-estudio.dan1d.dev
+      LETSENCRYPT_HOST: www.euca-estudio.com, euca-estudio.com
       LETSENCRYPT_EMAIL: danielfromarg@gmail.com 
 
 networks:
