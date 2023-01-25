@@ -38,8 +38,8 @@ services:
       WORDPRESS_DB_HOST: db:3310
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
-      VIRTUAL_HOST: www.euca.dan1d.dev, euca.dan1d.dev
-      LETSENCRYPT_HOST: www.euca.dan1d.dev, euca.dan1d.dev
+      VIRTUAL_HOST: www.euca-estudio.dan1d.dev, euca-estudio.dan1d.dev
+      LETSENCRYPT_HOST: www.euca-estudio.dan1d.dev, euca-estudio.dan1d.dev
       VIRTUAL_PORT: 3010
       LETSENCRYPT_EMAIL: danielfromarg@gmail.com 
 
