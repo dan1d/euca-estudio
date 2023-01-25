@@ -14,7 +14,7 @@ services:
       MYSQL_PASSWORD: wordpress
       MYSQL_DB_HOST: 3310
     networks:
-      - wpsite
+      - nginx-proxy
   # phpmyadmin
   phpmyadmin:
     depends_on:
@@ -27,7 +27,7 @@ services:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: password 
     networks:
-      - wpsite
+      - nginx-proxy
   # Wordpress
   wordpress:
     depends_on:
@@ -46,7 +46,7 @@ services:
       VIRTUAL_PORT: 3010
       LETSENCRYPT_EMAIL: danielfromarg@gmail.com 
     networks:
-      - wpsite
+      - nginx-proxy
 networks:
   default:
     external:
