@@ -1,5 +1,10 @@
 services:
   wordpress:
+  labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.react.rule=Host(`euca-estudio.com`, `www.euca-estudio.com`)'
+      - 'traefik.http.routers.react.entrypoints=websecure'
+      - 'traefik.http.routers.react.tls.certresolver=myresolver'
     image: wordpress:latest
     container_name: euca-estudio
     domainname: euca-estudio.com
@@ -11,13 +16,9 @@ services:
     volumes: ['./wordpress:/var/www/html/clients/euca-estudio']
     env_file:
       - ./.env
-    environment:
-      VIRTUAL_HOST: euca-estudio.com, www.euca-estudio.com
-      VIRTUAL_PORT: 8001
-      LETSENCRYPT_HOST: www.euca-estudio.com, euca-estudio.com
-      LETSENCRYPT_EMAIL: danielfromarg@gmail.com 
 
 networks:
   default:
-    external:
-      name: nginx-proxy
+    # Use a custom driver
+    name: dan1d_network
+    driver: bridge
