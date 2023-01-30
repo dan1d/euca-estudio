@@ -24,6 +24,5 @@ services:
 
 networks:
   default:
-    # Use a custom driver
-    name: dan1d_network
-    driver: bridge
+    external:
+      name: nginx-proxy
