@@ -6,14 +6,14 @@ services:
     hostname: euca-estudio.com
     build: .
     ports:
-      - '8001:80'
+      - '80:80'
     restart: always
     volumes: ['./wordpress:/var/www/html/clients/euca-estudio']
     env_file:
       - ./.env
     environment:
       VIRTUAL_HOST: euca-estudio.com, www.euca-estudio.com
-      VIRTUAL_PORT: 8001
+      VIRTUAL_PORT: 80
       LETSENCRYPT_HOST: www.euca-estudio.com, euca-estudio.com
       LETSENCRYPT_EMAIL: danielfromarg@gmail.com 
 
