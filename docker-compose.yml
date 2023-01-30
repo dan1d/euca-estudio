@@ -16,6 +16,12 @@ services:
       - 'traefik.http.routers.react.rule=Host(`euca-estudio.com`, `www.euca-estudio.com`)'
       - 'traefik.http.routers.react.entrypoints=websecure'
       - 'traefik.http.routers.react.tls.certresolver=myresolver'
+    environment:
+      VIRTUAL_HOST: www.euca-estudio.com, euca-estudio.com
+      VIRTUAL_PORT: 3010
+      LETSENCRYPT_HOST: www.euca-estudio.com, euca-estudio.com
+      LETSENCRYPT_EMAIL: danielfromarg@gmail.com 
+
 networks:
   default:
     # Use a custom driver
