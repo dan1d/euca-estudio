@@ -6,7 +6,7 @@ services:
     hostname: euca-estudio.com
     build: .
     ports:
-      - '8001:3000'
+      - '8001:8001'
     restart: always
     volumes: ['./wordpress:/var/www/html/clients/euca-estudio']
     env_file:
@@ -18,7 +18,7 @@ services:
       - 'traefik.http.routers.react.tls.certresolver=myresolver'
     environment:
       VIRTUAL_HOST: www.euca-estudio.com, euca-estudio.com
-      VIRTUAL_PORT: 3000
+      VIRTUAL_PORT: 8001
       LETSENCRYPT_HOST: www.euca-estudio.com, euca-estudio.com
       LETSENCRYPT_EMAIL: danielfromarg@gmail.com 
 
