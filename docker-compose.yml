@@ -18,10 +18,10 @@ services:
       - 'traefik.http.routers.react.tls.certresolver=myresolver'
     environment:
       PORT: 3000
-      # VIRTUAL_HOST: www.euca-estudio.com, euca-estudio.com
-    #   VIRTUAL_PORT: 8001
-    #   LETSENCRYPT_HOST: www.euca-estudio.com, euca-estudio.com
-    #   LETSENCRYPT_EMAIL: danielfromarg@gmail.com 
+      WORDPRESS_DB_NAME: silvermica
+      WORDPRESS_DB_USER: sylv3rrrrrrmik41
+      WORDPRESS_DB_PASSWORD: yPbUGI4Q6UsdmGc8oypJoqSJWmEnpJCgpWJ+40J6Hi9RedMmu9mxOHV1beJshbVPthI
+      WORDPRESS_DB_HOST: mysql_db:3306
 
 networks:
   default:
