@@ -11,8 +11,6 @@ services:
     volumes: 
       - dbdata:/var/lib/mysql
     command: '--default-authentication-plugin=mysql_native_password'
-    networks:
-      - dan1d_network
 
   wordpress:
     labels:
@@ -34,8 +32,6 @@ services:
       - WORDPRESS_DB_NAME=wordpress
     volumes:
       - wordpress:/var/www/html
-    networks:
-      - dan1d_network
 
 volumes:
   wordpress:
