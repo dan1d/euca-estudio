@@ -1,6 +1,6 @@
 services:
   wordpress:
-  labels:
+    labels:
       - 'traefik.enable=true'
       - 'traefik.http.routers.react.rule=Host(`euca-estudio.com`, `www.euca-estudio.com`)'
       - 'traefik.http.routers.react.entrypoints=websecure'
