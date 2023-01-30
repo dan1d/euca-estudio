@@ -15,6 +15,12 @@ services:
       - app-network
 
   wordpress:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`euca-estudio.com`, `www.euca-estudio.com`)"
+      - "traefik.http.routers.api.entrypoints=websecure,ws,wss"
+      - "traefik.http.routers.api.tls.certresolver=myresolver"
+      - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
     depends_on: 
       - db
     image: wordpress:5.1.1-fpm-alpine
@@ -29,39 +35,14 @@ services:
     volumes:
       - wordpress:/var/www/html
     networks:
-      - app-network
-
-  webserver:
-    depends_on:
-      - wordpress
-    image: nginx:1.15.12-alpine
-    container_name: webserver
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - wordpress:/var/www/html
-      - ./nginx-conf:/etc/nginx/conf.d
-      - certbot-etc:/etc/letsencrypt
-    networks:
-      - app-network
-
-  certbot:
-    depends_on:
-      - webserver
-    image: certbot/certbot
-    container_name: certbot
-    volumes:
-      - certbot-etc:/etc/letsencrypt
-      - wordpress:/var/www/html
-    command: certonly --webroot --webroot-path=/var/www/html --email danielfromarg@gmail.com --agree-tos --no-eff-email --force-renewal -d your_domain -d www.your_domain
+      - dan1d_network
 
 volumes:
-  certbot-etc:
   wordpress:
   dbdata:
 
 networks:
-  app-network:
+  default:
+    # Use a custom driver
+    name: dan1d_network
     driver: bridge
